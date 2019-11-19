@@ -17,7 +17,7 @@ public class Downloader {
 	
 	/**
 	 * Metodo che legge i dati in formato JSON dall'URL e successivamente individua l' URL dal quale si possono
-	 * scaricare i dati utili in formato csv. Nel caso in cui il programma ha scaricato in passato il csv dei dati
+	 * scaricare i dati utili in formato tsv. Nel caso in cui il programma ha scaricato in passato il csv dei dati
 	 * viene eseguita un FileAlreadyExistException: il metodo controlla se il timeStamp del tsv che sta per
 	 * scaricare è antecedente alla data dell'ultima modifica del file scaricato.
 	 * @return
