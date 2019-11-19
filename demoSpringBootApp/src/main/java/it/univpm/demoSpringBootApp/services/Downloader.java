@@ -1,7 +1,21 @@
 package it.univpm.demoSpringBootApp.services;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URI;
+import java.net.URL;
+import java.net.URLConnection;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 public class Downloader {
 	private String url;
@@ -17,7 +31,7 @@ public class Downloader {
 	
 	/**
 	 * Metodo che legge i dati in formato JSON dall'URL e successivamente individua l' URL dal quale si possono
-	 * scaricare i dati utili in formato tsv. Nel caso in cui il programma ha scaricato in passato il csv dei dati
+	 * scaricare i dati utili in formato tsv. Nel caso in cui il programma ha scaricato in passato il tsv dei dati
 	 * viene eseguita un FileAlreadyExistException: il metodo controlla se il timeStamp del tsv che sta per
 	 * scaricare è antecedente alla data dell'ultima modifica del file scaricato.
 	 * @return
@@ -31,7 +45,7 @@ public class Downloader {
 
 		try {
 			
-			URLConnection openConnection = new URL(url).openConnection();		//Opening the connection
+			URLConnection openConnection = new URL(url).openConnection();		//Connessione aperta
 			openConnection.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0");
 			InputStream in = openConnection.getInputStream();
 			
@@ -44,11 +58,11 @@ public class Downloader {
 			   InputStreamReader inR = new InputStreamReader( in );
 			   BufferedReader buf = new BufferedReader( inR );
 			  
-			   while ( ( line = buf.readLine() ) != null ) {		//Reading data from the url
+			   while ( ( line = buf.readLine() ) != null ) {		//Lettura dati da url
 				   data+= line;
 			   }
 			 } finally {
-			   in.close();		//After the use the connection is closed
+			   in.close();		//Connessione chiusa
 			 }
 			 
 			 System.out.println("Data read correctly!");
@@ -65,11 +79,11 @@ public class Downloader {
 			    if ( o instanceof JSONObject ) {
 			        JSONObject obj = (JSONObject)o; //each element into the array is converted into a JSONObject
 			        format = (String)obj.get("format"); //get the format of the file identified by this resource object
-			        date = dateFormat.parse((String)obj.get("revision_timestamp"));	/*Convert the string date identified by the "revision_timestamp
+			        date = (Date) dateFormat.parse((String)obj.get("revision_timestamp"));	/*Convert the string date identified by the "revision_timestamp
       																		       into a Date type object, using the dateFormat defined*/
 			        urlD = (String)obj.get("url");		//get the url of the resource
 			        System.out.println(format + " | " + date+" | "+urlD);
-			        if(format.substring(format.lenght-3,format.lenght).equals(TSV)) {		//data is downlaoded only if the format is csv
+			        if(format.substring(format.lenght-3,format.length()).equals(TSV)) {		//data is downlaoded only if the format is tsv
 			        	downloadFile(urlD, "dataFIle.tsv");
 			        	return true;
 			        }
@@ -82,7 +96,7 @@ public class Downloader {
 			String fileDataString=	dateFormat.format(dataFile.lastModified());		//get the data of the last edit of the file
 			Date fileData=null;
 			try {
-				fileData = dateFormat.parse(fileDataString);		//convert the data of the file into date type
+				fileData = (Date) dateFormat.parse(fileDataString);		//convert the data of the file into date type
 			} catch (ParseException e1) {
 				e1.printStackTrace();
 			}
@@ -121,13 +135,13 @@ public class Downloader {
 	}
 	
 	/**
-	 * Metodo statico che scarica in un file i dati csv contenuti in un URL.
-	 * @param url, csv link downloader
+	 * Metodo statico che scarica in un file i dati tsv contenuti in un URL.
+	 * @param url, tsv link downloader
 	 * @param fileName, file nel quale saranno memorizzati i dati
 	 * @throws Exception
 	 */
 	
-	public static void downloadFile(String url, String fileName) throws Exception {		/*this function copies the csv found from the url into a file
+	public static void downloadFile(String url, String fileName) throws Exception {		/*this function copies the tsv found from the url into a file
 																						named by the value of the variable "fileName" */
 	    try (InputStream in = URI.create(url).toURL().openStream()) {
 	        Files.copy(in, Paths.get(fileName));
