@@ -19,33 +19,24 @@ import java.util.Locale;
 
 public class Downloader {
 	private String url;
-	/**
-	 * Costruttore che istanzia l'URL dal quale effettuare il download
-	 * @param url
-	 */
+	
 	
 	public Downloader (String url)
 	{
 		this.url=url;
 	}
 	
-	/**
-	 * Metodo che legge i dati in formato JSON dall'URL e successivamente individua l' URL dal quale si possono
-	 * scaricare i dati utili in formato tsv. Nel caso in cui il programma ha scaricato in passato il tsv dei dati
-	 * viene eseguita un FileAlreadyExistException: il metodo controlla se il timeStamp del tsv che sta per
-	 * scaricare è antecedente alla data dell'ultima modifica del file scaricato.
-	 * @return
-	 */
+	
 	
 	public boolean readFromJson()
 	{
-        DateFormat dateFormat = new SimpleDateFormat("E d MMMM yyyy", Locale.ITALIAN);	//get the date format
+        DateFormat dateFormat = new SimpleDateFormat("E d MMMM yyyy", Locale.ITALIAN);	
 		Date date=null;
 		String format="",urlD="";
 
 		try {
 			
-			URLConnection openConnection = new URL(url).openConnection();		//Connessione aperta
+			URLConnection openConnection = new URL(url).openConnection();		
 			openConnection.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0");
 			InputStream in = openConnection.getInputStream();
 			
@@ -58,55 +49,55 @@ public class Downloader {
 			   InputStreamReader inR = new InputStreamReader( in );
 			   BufferedReader buf = new BufferedReader( inR );
 			  
-			   while ( ( line = buf.readLine() ) != null ) {		//Lettura dati da url
+			   while ( ( line = buf.readLine() ) != null ) {		
 				   data+= line;
 			   }
 			 } finally {
-			   in.close();		//Connessione chiusa
+			   in.close();		
 			 }
 			 
 			 System.out.println("Data read correctly!");
 			 System.out.println("Parsing the json...");
 			 
-			JSONObject mainObj = (JSONObject) JSONValue.parseWithException(data); /*Parsing all the data read from string to json, which is used for
-																				   creating the main JSONObject which contains everything*/
-			JSONObject resultObj = (JSONObject) (mainObj.get("result")); 	//Identifying the "result" object into the main JSONObject
-			JSONArray resourcesObj = (JSONArray) (resultObj.get("resources"));	//Identifying the "resources" array into the "result" JSONObject
+			JSONObject mainObj = (JSONObject) JSONValue.parseWithException(data); 
+																				  
+			JSONObject resultObj = (JSONObject) (mainObj.get("result")); 	
+			JSONArray resourcesObj = (JSONArray) (resultObj.get("resources"));	
 			System.out.println("JSON parsed!");
 			
 			System.out.println("Starting download Tsv...");
-			for(Object o: resourcesObj){	//for each element into the array is taken  the url, the format and the date
+			for(Object o: resourcesObj){	
 			    if ( o instanceof JSONObject ) {
-			        JSONObject obj = (JSONObject)o; //each element into the array is converted into a JSONObject
-			        format = (String)obj.get("format"); //get the format of the file identified by this resource object
-			        date = (Date) dateFormat.parse((String)obj.get("revision_timestamp"));	/*Convert the string date identified by the "revision_timestamp
-      																		       into a Date type object, using the dateFormat defined*/
-			        urlD = (String)obj.get("url");		//get the url of the resource
+			        JSONObject obj = (JSONObject)o; 
+			        format = (String)obj.get("format"); 
+			        date = (Date) dateFormat.parse((String)obj.get("revision_timestamp"));	
+      																		      
+			        urlD = (String)obj.get("url");		
 			        System.out.println(format + " | " + date+" | "+urlD);
-			        if(format.substring(format.lenght-3,format.length()).equals(TSV)) {		//data is downlaoded only if the format is tsv
+			        if(format.substring(format.lenght-3,format.length()).equals(TSV)) {		
 			        	downloadFile(urlD, "dataFIle.tsv");
 			        	return true;
 			        }
 			    }
 			}
-		}catch (FileAlreadyExistsException e) 	//this exception is throwed when the file already exists
+		}catch (FileAlreadyExistsException e) 	
 		{
 			
 			File dataFile=new File("dataFile.tsv");
-			String fileDataString=	dateFormat.format(dataFile.lastModified());		//get the data of the last edit of the file
+			String fileDataString=	dateFormat.format(dataFile.lastModified());		
 			Date fileData=null;
 			try {
-				fileData = (Date) dateFormat.parse(fileDataString);		//convert the data of the file into date type
+				fileData = (Date) dateFormat.parse(fileDataString);		
 			} catch (ParseException e1) {
 				e1.printStackTrace();
 			}
 			
-			if(fileData.compareTo(date)>0)	//.compareTo methods returns int>0 if fileData>date , return int <0 if date>fileData
+			if(fileData.compareTo(date)>0)	
 				System.out.println("The data file already exists | last edit "+fileDataString);
 			else
 			{
 				
-				if (dataFile.delete())		//the old data file is deleted and then the new data is downloaded
+				if (dataFile.delete())		
 					{try {
 						downloadFile(urlD,"dataFile.csv");
 						return true;
@@ -134,15 +125,10 @@ public class Downloader {
 		return true;
 	}
 	
-	/**
-	 * Metodo statico che scarica in un file i dati tsv contenuti in un URL.
-	 * @param url, tsv link downloader
-	 * @param fileName, file nel quale saranno memorizzati i dati
-	 * @throws Exception
-	 */
 	
-	public static void downloadFile(String url, String fileName) throws Exception {		/*this function copies the tsv found from the url into a file
-																						named by the value of the variable "fileName" */
+	
+	public static void downloadFile(String url, String fileName) throws Exception {		
+																						
 	    try (InputStream in = URI.create(url).toURL().openStream()) {
 	        Files.copy(in, Paths.get(fileName));
 	    }
