@@ -57,11 +57,13 @@ public void setMigrants(double[] migrants) {
 	this.migrants = migrants;
 }
 
-/*@Override
+@Override
 public String toString() {
 	StringBuilder s;
 	s = new StringBuilder("StatusMigranti{" + "reason = " + reason + " citizen = " + citizen + " unit = " + unit + " geo = " + geo + " ");
 	
-	for(int i = 0; i<)
-} */
+	for(int i = 0; i < 11; i++) s.append(" anno = ").append(2018 - i).append(" migranti = ").append(migrants[i]).append(";");
+	s.append('}');
+	return s.toString();
+	} 
 }
