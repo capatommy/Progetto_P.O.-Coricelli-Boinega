@@ -27,7 +27,8 @@ public class MigrantsRepo {
 		parserSettings.setRowProcessor(rowProcessor);
 		parserSettings.getFormat().setLineSeparator("\n");
 		parserSettings.setHeaderExtractionEnabled(true);
-		parserSettings.setProcessorErrorHandler(new RetryableErrorHandler<ParsingContext>() {		
+		parserSettings.setProcessorErrorHandler(new RetryableErrorHandler<ParsingContext>() {	
+			
 		    @Override
 		    public void handleError(DataProcessingException error, Object[] inputRow, ParsingContext context) {
 		     		            getDefaultValue();		
