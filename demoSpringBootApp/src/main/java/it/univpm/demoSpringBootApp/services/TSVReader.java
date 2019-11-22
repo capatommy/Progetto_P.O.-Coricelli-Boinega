@@ -59,4 +59,9 @@ public class TSVReader {
 		return migrantsList;
 	}	
 	
+	public BufferedReader getReader()
+	{
+		return this.reader;
+	}
+	
 }
