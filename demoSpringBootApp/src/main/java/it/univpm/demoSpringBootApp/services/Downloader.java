@@ -11,10 +11,10 @@ import java.net.URLConnection;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -70,7 +70,7 @@ public class Downloader {
 			System.out.println("JSON parsed!");
 			
 			System.out.println("Starting download Tsv...");
-			for(Object o: resourcesObj){	
+			for(Object o : resourcesObj){	
 			    if ( o instanceof JSONObject ) {
 			        JSONObject obj = (JSONObject)o; 
 			        format = (String)obj.get("format"); 
@@ -78,7 +78,8 @@ public class Downloader {
       																		      
 			        urlD = (String)obj.get("url");		
 			        System.out.println(format + " | " + date+" | "+urlD);
-			        if(format.substring(format.lenght-3,format.length()).equals(TSV)) {		
+			        /*if(format.substring(format.length()-3,format.length()).equals("TSV"))*/
+			        if(format.equals("http://publications.europa.eu/resource/authority/file-type/TSV")){		
 			        	downloadFile(urlD, "dataFIle.tsv");
 			        	return true;
 			        }
