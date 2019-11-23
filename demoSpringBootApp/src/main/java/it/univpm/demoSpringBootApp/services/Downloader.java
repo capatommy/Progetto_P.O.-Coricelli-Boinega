@@ -34,7 +34,7 @@ public class Downloader {
 	
 	public boolean readFromJson()
 	{
-        DateFormat dateFormat = new SimpleDateFormat("E d MMMM yyyy", Locale.ITALIAN);	
+        DateFormat dateFormat = new SimpleDateFormat(" dd MMMM yyyy", Locale.ITALIAN);	
 		Date date=null;
 		String format="",urlD="";
 
