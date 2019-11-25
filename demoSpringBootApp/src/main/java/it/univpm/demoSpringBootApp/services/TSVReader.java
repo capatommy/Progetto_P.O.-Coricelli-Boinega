@@ -36,7 +36,8 @@ public class TSVReader {
 	{
 		String temp;
 		while((temp = reader.readLine()) != null) {
-			String[] campo = temp.trim().split(TAB_DELIMETER);
+			String[] campo = temp.trim().split(",");
+			System.out.println(campo);
 			String reason = campo[0].trim ();
             String citizen = campo[1].trim ();
             String unit = campo[2].trim ();

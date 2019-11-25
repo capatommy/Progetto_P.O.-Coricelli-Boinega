@@ -2,7 +2,6 @@ package it.univpm.demoSpringBootApp.services;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
@@ -11,14 +10,11 @@ import java.net.URLConnection;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
+import it.univpm.demoSpringBootApp.services.TSVReader;
+import it.univpm.demoSpringBootApp.services.MetaData;
 
 
 public class Downloader {
@@ -32,10 +28,8 @@ public class Downloader {
 	
 	
 	
-	public boolean readFromJson()
+	public boolean readFromJson() throws Exception
 	{
-        DateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy", Locale.ITALIAN);	
-		Date date=null;
 		String format="",urlD="";
 
 		try {
@@ -63,8 +57,7 @@ public class Downloader {
 			 System.out.println("Data read correctly!");
 			 System.out.println("Parsing the json...");
 			 
-			JSONObject mainObj = (JSONObject) JSONValue.parseWithException(data); 
-																				  
+			JSONObject mainObj = (JSONObject) JSONValue.parseWithException(data); 															  
 			JSONObject resultObj = (JSONObject) (mainObj.get("result")); 	
 			JSONArray resourcesObj = (JSONArray) (resultObj.get("resources"));	
 			System.out.println("JSON parsed!");
@@ -73,12 +66,9 @@ public class Downloader {
 			for(Object o : resourcesObj){	
 			    if ( o instanceof JSONObject ) {
 			        JSONObject obj = (JSONObject)o; 
-			        format = (String)obj.get("format"); 
-			        date = (Date) dateFormat.parse((String)obj.get("revision_timestamp"));	
-      																		      
+			        format = (String)obj.get("format"); 													      
 			        urlD = (String)obj.get("url");		
-			        System.out.println(format + " | " + date+" | "+urlD);
-			        /*if(format.substring(format.length()-3,format.length()).equals("TSV"))*/
+			        System.out.println(format + " | " + "date"+" | "+urlD);
 			        if(format.equals("http://publications.europa.eu/resource/authority/file-type/TSV")){		
 			        	downloadFile(urlD, "dataFIle.tsv");
 			        	return true;
@@ -89,22 +79,10 @@ public class Downloader {
 		{
 			
 			File dataFile=new File("dataFile.tsv");
-			String fileDataString=	dateFormat.format(dataFile.lastModified());		
-			Date fileData=null;
-			try {
-				fileData = (Date) dateFormat.parse(fileDataString);		
-			} catch (ParseException e1) {
-				e1.printStackTrace();
-			}
-			
-			if(fileData.compareTo(date)>0)	
-				System.out.println("The data file already exists | last edit "+fileDataString);
-			else
-			{
 				
 				if (dataFile.delete())		
 					{try {
-						downloadFile(urlD,"dataFile.csv");
+						downloadFile(urlD,"dataFile.tsv");
 						return true;
 					} catch (Exception e1) {
 						e1.printStackTrace();
@@ -116,19 +94,11 @@ public class Downloader {
 						System.out.println("Unable to delete the older dataFile.tsv");
 						return false;
 					}
+				}
+		return false;
 			}
-			
-			
-		}catch (IOException e) {			
-			e.printStackTrace();
-			return false;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-		
-		return true;
-	}
+		TSVReader reader = new TSVReader("dataFile.tsv");
+		MetaData metadata = new MetaData();
 	
 	
 	
