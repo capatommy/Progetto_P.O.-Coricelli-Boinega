@@ -1,8 +1,6 @@
 package it.univpm.demoSpringBootApp.models;
 
-import java.io.Serializable;
-
-public class MigrationStatus implements Serializable{
+public class MigrationStatus {
 	private String reason;
 	private String citizen;
 	private String unit;

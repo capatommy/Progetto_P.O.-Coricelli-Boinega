@@ -10,11 +10,11 @@ import it.univpm.demoSpringBootApp.services.Downloader;
 public class DemoSpringBootAppApplication {
 
 	public static void main(String[] args) throws Exception {
+		String filename = "dataFile.tsv;";
+		String url = "http://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/migr_reschange.tsv.gz&unzip=true";
+		Downloader.download(url,filename);
 		
-		String url = "http://data.europa.eu/euodp/data/api/3/action/package_show?id=xne06J0RLKnkWIYaUZhTYQ";
-		Downloader file = new Downloader(url);
-		
-		if (file.readFromJson()) 
+		/*if (file.readFromJson()) 
 		{
 			try 
 			{
@@ -24,6 +24,6 @@ public class DemoSpringBootAppApplication {
 				e.printStackTrace();
 			}
 	
-	}
+	} */
 }
 }

@@ -11,6 +11,7 @@ import it.univpm.demoSpringBootApp.models.MigrationStatus;
 
 public class TSVReader {
 	private final static String TAB_DELIMETER = "	";
+	private final static String COMMA_DELIMETER = ";";
 	static List<String> anni = new ArrayList<>();
 	static List<MigrationStatus> migrantsList = new ArrayList<>();
 	private BufferedReader reader;
@@ -25,7 +26,7 @@ public class TSVReader {
 		
 		}catch (FileNotFoundException e)
 		{
-			System.out.println("Error reading file: "+this.filename);
+			System.out.println("Error reading file: " + this.filename);
 		}catch (Exception ex)
 		{
 			ex.printStackTrace();
