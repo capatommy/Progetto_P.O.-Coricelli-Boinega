@@ -1,5 +1,8 @@
 package it.univpm.demoSpringBootApp;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -16,7 +19,12 @@ public class DemoSpringBootAppApplication {
 		
 		String filename = "dataFile.tsv;";
 		String url = "http://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/migr_reschange.tsv.gz&unzip=true";
+		
+		if(Files.exists(Paths.get(filename))) {
+			System.out.println("File gia scaricato.");
+		}else {
 		Downloader.download(url,filename);
+		}
 		
 		TSVReader parser = new TSVReader(filename);
 		parser.parsing();
