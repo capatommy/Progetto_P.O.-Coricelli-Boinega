@@ -14,14 +14,14 @@ public List<Map> getMetalist() {
 		return metalist;
 	}
 
-	MetaData() {
+	public MetaData() {
 		Field[] campi = MigrationStatus.class.getDeclaredFields();
 		for (Field i : campi) {
 			Map<String,String> map = new HashMap<>();
 			map.put("alias", i.getName());
 			if(!i.getName().equals("migrants"))
 				map.put("source", i.getName().toUpperCase());
-			else map.put("source","time");
+			else map.put("source","TIME");
 			map.put("type", i.getType().getSimpleName());
 			metalist.add(map);
 		}
