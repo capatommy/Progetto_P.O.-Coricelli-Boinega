@@ -11,13 +11,14 @@ import it.univpm.demoSpringBootApp.services.TSVReader;
 public class DemoSpringBootAppApplication {
 
 	public static void main(String[] args) throws Exception {	
+		SpringApplication.run(DemoSpringBootAppApplication.class, args);
 		String filename = "dataFile.tsv;";
 		String url = "http://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/migr_reschange.tsv.gz&unzip=true";
-		//Downloader.download(url,filename);
+		Downloader.download(url,filename);
 		TSVReader gigio = new TSVReader(filename);
 		gigio.parsing();
 		//System.out.println(gigio.getMigrantsList());
 		
-		SpringApplication.run(DemoSpringBootAppApplication.class, args);
+		
 	}
 }
