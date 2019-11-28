@@ -30,7 +30,7 @@ public class DemoSpringBootAppApplication {
 		parser.parsing();
 		
 		MetaData metadata = new MetaData();
-		System.out.println(metadata.getMetalist().toString());
+		//System.out.println(metadata.getMetalist().toString());
 		
 	}
 }

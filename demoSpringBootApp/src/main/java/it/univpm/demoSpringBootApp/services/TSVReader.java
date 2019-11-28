@@ -38,6 +38,7 @@ public class TSVReader {
 	public void parsing() throws IOException
 	{
 		String temp;
+		reader.readLine();
 		while((temp = reader.readLine()) != null) {
 			temp = temp.replace(",", TAB_DELIMETER);
 			temp = temp.replace(":", "-1");
@@ -58,7 +59,7 @@ public class TSVReader {
                 migrants[i] = Double.parseDouble ( campo[4 + i].trim () ); 
             	}
             
-            System.out.println(Arrays.toString(campo));
+           // System.out.println(Arrays.toString(campo));
             MigrationStatus status = new MigrationStatus ( reason, citizen, unit, geo, migrants);
             migrantsList.add ( status );
 			}
@@ -69,12 +70,8 @@ public class TSVReader {
 		return anni;
 	}
 
-	public static String getMigrantsList() {
-		String app="";
-		for(int i=0;i<4;i++) {
-			app += migrantsList.get(i).getCitizen()+" "+migrantsList.get(i).getGeo()+" "+migrantsList.get(i).getReason()+" "+migrantsList.get(i).getUnit()+"/n";
-		}
-		return app;
+	public static List<MigrationStatus> getMigrantsList() {
+		return migrantsList;
 	}	
 	
 	public BufferedReader getReader()
