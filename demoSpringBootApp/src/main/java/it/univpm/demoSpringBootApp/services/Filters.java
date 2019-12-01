@@ -30,6 +30,7 @@ public class Filters {
 	}
 	
 	public <T> Collection<T> select(Collection<T> src, List<String> fieldName, List<String> operator, List<Object> value, List<String> LogOp) {
+		
 		Collection<T> out = new ArrayList<T>();
 		for(T item: src) {
 			try {
