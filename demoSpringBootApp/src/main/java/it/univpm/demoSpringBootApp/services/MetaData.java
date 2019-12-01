@@ -9,19 +9,20 @@ import java.util.Map;
 
 public class MetaData {
 	private List<Map> metalist = new ArrayList<>();
-	private	Map<String,String> map = new HashMap<>();
 	
 	public List<Map> getMetalist() {
 		return metalist;
 	}
 	
-	public String getType(String alias) {
+	/*public String getType(String alias) {
 		return map.get(alias);
-	} 
+	} */
 
 	public MetaData() {
+		
 		Field[] campi = MigrationStatus.class.getDeclaredFields();
 		for (Field i : campi) {
+			Map<String,String> map = new HashMap<>();
 			map.put("alias", i.getName());
 			if(!i.getName().equals("migrants"))
 				map.put("source", i.getName().toUpperCase());

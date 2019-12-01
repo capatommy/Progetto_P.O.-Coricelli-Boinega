@@ -21,7 +21,7 @@ public class MigrantsController {
 		return TSVReader.getMigrantsList();
 	}
 	
-	@GetMapping("/migrants/get")
+	/*@GetMapping("/migrants/get")
 	public List<MigrationStatus> MigrantsFilter(@RequestParam(value = "filter", defaultValue = "", required = false) String filter)
 	{
 		List<MigrationStatus> migrantsrepo = TSVReader.getMigrantsList();
@@ -51,6 +51,6 @@ public class MigrantsController {
 				}
 			}
 		return 
-		} 
+		} */
 	}
 
