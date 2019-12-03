@@ -1,17 +1,13 @@
 package it.univpm.demoSpringBootApp.models;
 
-import it.univpm.demoSpringBootApp.models.MigYear;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
+import java.lang.reflect.Array;
 
 public class MigrationStatus {
 	private String reason;
 	private String citizen;
 	private String unit;
 	private String geo;
-	private List<MigYear> migrants;
+	private double[] migrants;
 	
 public MigrationStatus() {
 		this.reason = "";
@@ -21,7 +17,7 @@ public MigrationStatus() {
 		this.migrants = null;
 		}	
 
-public MigrationStatus(String reason, String citizen, String unit, String geo, List<MigYear> migrants) {
+public MigrationStatus(String reason, String citizen, String unit, String geo, double[] migrants) {
 	this.reason = reason;
 	this.citizen = citizen;
 	this.unit = unit;
@@ -61,13 +57,11 @@ public void setGeo(String geo) {
 	this.geo = geo;
 }
 
-
-
-public List<MigYear> getMigrants() {
+public double[] getMigrants() {
 	return migrants;
 }
 
-public void setMigrants(List<MigYear> migrants) {
+public void setMigrants(double[] migrants) {
 	this.migrants = migrants;
 }
 

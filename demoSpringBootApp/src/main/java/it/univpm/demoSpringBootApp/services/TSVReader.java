@@ -5,16 +5,13 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import it.univpm.demoSpringBootApp.models.MigYear;
 import it.univpm.demoSpringBootApp.models.MigrationStatus;
 
 public class TSVReader {
 	private final static String TAB_DELIMETER = "	";
-	//private final static String COMMA_DELIMETER = ",";
-	//private final static String NULL_CHAR = ":d";
+	
 	static List<String> anni = new ArrayList<>();
 	static List<MigrationStatus> migrantsList = new ArrayList<>();
 	private BufferedReader reader;
@@ -45,24 +42,21 @@ public class TSVReader {
 			temp = temp.replace(":", "-1");
 			temp = temp.replace("d", "");
 			temp = temp.replace("z", "");
-			//temp = temp.replace(NULL_CHAR, null);
+
 			String[] campo = temp.trim().split(TAB_DELIMETER);
 			if(campo.length>1) {
 			String reason = campo[0].trim ();
             String citizen = campo[1].trim ();
             String unit = campo[2].trim ();
             String geo = campo[3].trim ();
-            List<MigYear> migrants = new ArrayList<MigYear>();
+            double[] migrants = new double[11];
             
             	for (int i = 0; i<11; i++) {
            
-            	MigYear curr = new MigYear();
-            	curr.setValue(Double.parseDouble (campo[4 + i].trim ()));
-            	curr.setYear(2018-i);
-                migrants.add(curr);
+            		migrants[i] = Double.parseDouble ( campo[4 + i].trim () ); 
             	}
             
-           // System.out.println(Arrays.toString(campo));
+           
             MigrationStatus status = new MigrationStatus ( reason, citizen, unit, geo, migrants);
             migrantsList.add ( status );
 			}
@@ -71,6 +65,15 @@ public class TSVReader {
 
 	public static List<String> getAnni() {
 		return anni;
+	}
+	
+	static List getMigYear(int index){
+		List<Object> migyear = new ArrayList<>();
+		for(MigrationStatus mig : migrantsList) {
+			Object values = mig.getMigrants()[2018-index];
+			migyear.add(values);
+		}
+		return migyear;
 	}
 
 	public static List<MigrationStatus> getMigrantsList() {

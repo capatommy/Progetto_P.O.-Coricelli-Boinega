@@ -44,16 +44,19 @@ public class MigrantsController {
 					}else valueList.add(FilterV[++i]);*/
 				
 				fieldList.add(FilterV[i]);
+				if(FilterV[++i].contains("20")) {
+					YearList.add(FilterV[i]);
+				}else --i;
+				
 				opList.add(FilterV[++i]);
 				valueList.add(FilterV[++i]);
-				if(FilterV[++i].contains(""))
 				if(i+1<FilterV.length) {
 					OpLog.add(FilterV[++i]);
 				}
 				
 				}
 			}
-		return (List<MigrationStatus>) Filters.select(migrantsrepo, fieldList, opList, valueList, OpLog);
+		return (List<MigrationStatus>) Filters.select(migrantsrepo, fieldList, opList, valueList, OpLog, YearList);
 		}
 	}
 
