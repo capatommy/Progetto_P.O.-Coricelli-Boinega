@@ -21,7 +21,7 @@ public class MigrantsController {
 		return TSVReader.getMigrantsList();
 	}
 	
-	/*@GetMapping("/migrants/get")
+	@GetMapping("/migrants/get")
 	public List<MigrationStatus> MigrantsFilter(@RequestParam(value = "filter", defaultValue = "", required = false) String filter)
 	{
 		List<MigrationStatus> migrantsrepo = TSVReader.getMigrantsList();
@@ -29,28 +29,31 @@ public class MigrantsController {
 		List<String> opList = new ArrayList<String>();
 		List<Object> valueList = new ArrayList<Object>();
 		List<String> OpLog = new ArrayList<String>();
+		List<Object> YearList = new ArrayList<Object>();
 		String[] FilterV = filter.split(":");
-		if (filter.contentEquals("")) return TSVReader.getMigrantsList();
+		if (filter.contentEquals("")) return migrantsrepo;
 		
 		else {
 			
 			
 			for(int i=0; i<FilterV.length; i++) {
-				String field = FilterV[i];
-				String operator = FilterV[++i];
-				if(MetaData.getType(FilterV[++i])=="double") {
-					valueList.add(Double.parseDouble(FilterV[i]));
-					}else valueList.add(FilterV[i]);
+				//String field = FilterV[i];
+				//String operator = FilterV[++i];
+				/*if(field.equals("migrants"))  {
+					valueList.add(Double.parseDouble(FilterV[++i]));
+					}else valueList.add(FilterV[++i]);*/
 				
-				fieldList.add(field);
-				opList.add(operator);
-				if(FilterV[++i] != null) {
-					OpLog.add(FilterV[i]);
+				fieldList.add(FilterV[i]);
+				opList.add(FilterV[++i]);
+				valueList.add(FilterV[++i]);
+				if(FilterV[++i].contains(""))
+				if(i+1<FilterV.length) {
+					OpLog.add(FilterV[++i]);
 				}
 				
 				}
 			}
-		return 
-		} */
+		return (List<MigrationStatus>) Filters.select(migrantsrepo, fieldList, opList, valueList, OpLog);
+		}
 	}
 

@@ -1,13 +1,27 @@
 package it.univpm.demoSpringBootApp.models;
 
+import it.univpm.demoSpringBootApp.models.MigYear;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+
 public class MigrationStatus {
 	private String reason;
 	private String citizen;
 	private String unit;
 	private String geo;
-	private double[] migrants;
+	private List<MigYear> migrants;
 	
-public MigrationStatus(String reason, String citizen, String unit, String geo, double[] migrants) {
+public MigrationStatus() {
+		this.reason = "";
+		this.citizen = "";
+		this.unit = "";
+		this.geo = "";
+		this.migrants = null;
+		}	
+
+public MigrationStatus(String reason, String citizen, String unit, String geo, List<MigYear> migrants) {
 	this.reason = reason;
 	this.citizen = citizen;
 	this.unit = unit;
@@ -47,21 +61,21 @@ public void setGeo(String geo) {
 	this.geo = geo;
 }
 
-public double[] getMigrants() {
+
+
+public List<MigYear> getMigrants() {
 	return migrants;
 }
 
-public void setMigrants(double[] migrants) {
+public void setMigrants(List<MigYear> migrants) {
 	this.migrants = migrants;
 }
 
 @Override
 public String toString() {
-	StringBuilder s;
-	s = new StringBuilder("StatusMigranti{" + "reason = " + reason + " citizen = " + citizen + " unit = " + unit + " geo = " + geo + " ");
-	
-	for(int i = 0; i < 11; i++) s.append(" anno = ").append(2018 - i).append(" migranti = ").append(migrants[i]).append(";");
-	s.append('}');
-	return s.toString();
-	} 
+	return "MigrationStatus [reason=" + reason + ", citizen=" + citizen + ", unit=" + unit + ", geo=" + geo
+			+ ", migrants=" + migrants + "]";
+}
+
+
 }

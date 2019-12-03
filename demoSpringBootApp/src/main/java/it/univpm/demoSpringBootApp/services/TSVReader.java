@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import it.univpm.demoSpringBootApp.models.MigYear;
 import it.univpm.demoSpringBootApp.models.MigrationStatus;
 
 public class TSVReader {
@@ -51,12 +52,14 @@ public class TSVReader {
             String citizen = campo[1].trim ();
             String unit = campo[2].trim ();
             String geo = campo[3].trim ();
-            double[] migrants = new double[11];
+            List<MigYear> migrants = new ArrayList<MigYear>();
             
             	for (int i = 0; i<11; i++) {
            
-            	
-                migrants[i] = Double.parseDouble ( campo[4 + i].trim () ); 
+            	MigYear curr = new MigYear();
+            	curr.setValue(Double.parseDouble (campo[4 + i].trim ()));
+            	curr.setYear(2018-i);
+                migrants.add(curr);
             	}
             
            // System.out.println(Arrays.toString(campo));

@@ -14,8 +14,8 @@ public class MetaData {
 		return metalist;
 	}
 	
-	/*public String getType(String alias) {
-		return map.get(alias);
+	/*public boolean containsDouble(String alias) {
+		return metalist.;
 	} */
 
 	public MetaData() {
