@@ -87,7 +87,7 @@ public class Filters {
 						List<Integer> indexList = filterL(tmpV,operator.get(0), value.get(0));
 						List<MigrationStatus> outlist = new ArrayList<>();
 						List<MigrationStatus> miglist = TSVReader.getMigrantsList();
-						
+							
 						for(int i : indexList) {
 							outlist.add(miglist.get(i));
 						}
