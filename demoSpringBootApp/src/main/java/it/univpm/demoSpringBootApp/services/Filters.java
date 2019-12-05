@@ -35,37 +35,17 @@ public class Filters {
 		}else if(th instanceof String && value instanceof String)
 			return value.equals(th);
 		
-		/*else if(th instanceof List){
-			Double valuec = ((Number)value).doubleValue();
-			List thL = ((List) th);
-			if(!thL.isEmpty() && thL.get(0) instanceof Number) {
-				List<Double> valueL = new ArrayList<>();
-				for(Object o : thL) {
-					valueL.add(((Number) o).doubleValue());
-				}
-				switch (operator) {
-				case "$in":
-					return valueL.contains(valuec);
-				case "$nin" :
-					return !valueL.contains(valuec);
-				case "$bt" :
-					double first = valueL.get(0);
-					double second = valueL.get(1);
-					return valuec >= first && valuec <= second;
-				default:
-					throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "errore");
-				}
-			}else
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Lista vuota o non numerica");
-		}*/
 		return false;		
 	}
 	
 	 public static List<Integer> filterL(List val, String oper, Object rif) {
 	        List<Integer> indexL = new ArrayList<>();
+	        String rifS = (String) rif;
 	        for (int i = 0; i < val.size(); i++) {
-	            if (check(val.get(i), oper, rif)) 
+	            if (check(val.get(i), oper, Double.parseDouble(rifS))){ 
+	            	
 	                indexL.add(i);
+	                }
 	        }
 	        return indexL; 
 	    }
@@ -87,12 +67,14 @@ public class Filters {
 						List<Integer> indexList = filterL(tmpV,operator.get(0), value.get(0));
 						List<MigrationStatus> outlist = new ArrayList<>();
 						List<MigrationStatus> miglist = TSVReader.getMigrantsList();
-								
+						List<MigrationStatus> miglistApp=new ArrayList(miglist);
+						
 						for(int i : indexList) {
-							outlist.add(miglist.get(i));
+							miglistApp.get(i).setMigrantsFilteredValue((double) tmpV.get(i));
+							outlist.add(miglistApp.get(i));
 						}
-						//if(Filters.check(tmpV, operator.get(0), value.get(0)))
-							//out.add(item);
+						
+					
 						return (Collection<T>) outlist;
 						
 					}else {tmp = m.invoke(item);
@@ -126,10 +108,10 @@ public class Filters {
 							subLogicalLinkOperator=LogOp.subList(1, LogOp.size());
 
 					if (LogOp.get(0).equals("AND"))	
-						return select(out,fieldName.subList(1, fieldName.size()),operator.subList(1, operator.size()),value.subList(1,value.size()),subLogicalLinkOperator,yearl.subList(1,value.size()));
+						return select(out,fieldName.subList(1, fieldName.size()),operator.subList(1, operator.size()),value.subList(1,value.size()),subLogicalLinkOperator,yearl);
 					else
 					{
-						Collection<T> temp=select(src,fieldName.subList(1, fieldName.size()),operator.subList(1, operator.size()),value.subList(1,value.size()),subLogicalLinkOperator,yearl.subList(1,value.size()));
+						Collection<T> temp=select(src,fieldName.subList(1, fieldName.size()),operator.subList(1, operator.size()),value.subList(1,value.size()),subLogicalLinkOperator,yearl);
 						out.addAll(temp);	
 					}
 			}

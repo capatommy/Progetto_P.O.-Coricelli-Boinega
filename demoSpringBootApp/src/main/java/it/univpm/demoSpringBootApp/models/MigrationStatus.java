@@ -7,8 +7,17 @@ public class MigrationStatus {
 	private String citizen;
 	private String unit;
 	private String geo;
+	private double migrantsFilteredValue;
 	private double[] migrants;
 	
+public double getMigrantsFilteredValue() {
+		return migrantsFilteredValue;
+	}
+
+	public void setMigrantsFilteredValue(double migrantsFilteredValue) {
+		this.migrantsFilteredValue = migrantsFilteredValue;
+	}
+
 public MigrationStatus() {
 		this.reason = "";
 		this.citizen = "";

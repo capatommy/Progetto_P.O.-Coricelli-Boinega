@@ -75,6 +75,8 @@ public class TSVReader {
 		}
 		return migyear;
 	}
+	
+	
 
 	public static List<MigrationStatus> getMigrantsList() {
 		return migrantsList;

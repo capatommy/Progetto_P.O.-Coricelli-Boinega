@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import it.univpm.demoSpringBootApp.services.Filters;
-import it.univpm.demoSpringBootApp.services.MetaData;
 import it.univpm.demoSpringBootApp.services.TSVReader;
 
 import org.springframework.web.bind.annotation.GetMapping;
