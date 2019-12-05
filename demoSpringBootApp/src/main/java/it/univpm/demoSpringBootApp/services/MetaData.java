@@ -13,10 +13,6 @@ public class MetaData {
 	public List<Map> getMetalist() {
 		return metalist;
 	}
-	
-	/*public boolean containsDouble(String alias) {
-		return metalist.;
-	} */
 
 	public MetaData() {
 		

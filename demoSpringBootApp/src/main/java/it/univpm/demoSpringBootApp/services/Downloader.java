@@ -16,7 +16,16 @@ import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.ParseException;
 
+/**
+ * Donwloader class that create a tsv file refering to a json dataset from an URL.
+ * @param args
+ */
+
 public class Downloader {
+	
+	/**
+	 * main method that download the file from an URL
+	 */
 
 	public static void main(String[] args) {
 
@@ -32,8 +41,8 @@ public class Downloader {
 		}
 		try {
 			
-			URLConnection openConnection = new URL(url).openConnection();
-			openConnection.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0");
+			URLConnection openConnection = new URL(url).openConnection(); 
+			openConnection.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0"); //Open connection
 			InputStream in = openConnection.getInputStream();
 			
 			 StringBuilder data = new StringBuilder();
@@ -42,7 +51,7 @@ public class Downloader {
 			   InputStreamReader inR = new InputStreamReader( in );
 			   BufferedReader buf = new BufferedReader( inR );
 			  
-			   while ( ( line = buf.readLine() ) != null ) {
+			   while ( ( line = buf.readLine() ) != null ) { //Read the data with a buffer
 				   data.append(line);
 				   System.out.println( line );
 			   }
@@ -73,6 +82,13 @@ public class Downloader {
 		}
 	}
 	
+	/**
+	 * Download method that from the data create the tsv file, there is a recursive part that control the redirection of the url.
+	 * @param url, internet path
+	 * @param fileName, name of the tsv file
+	 * @throws Exception
+	 */
+	
 	public static void download(String url, String fileName) throws Exception {
 		HttpURLConnection openConnection = (HttpURLConnection) new URL(url).openConnection();
 		openConnection.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0");
@@ -80,13 +96,13 @@ public class Downloader {
 		 String data = "";
 		 String line = "";
 		 try {
-		   if(openConnection.getResponseCode() >= 300 && openConnection.getResponseCode() < 400) {
+		   if(openConnection.getResponseCode() >= 300 && openConnection.getResponseCode() < 400) { //Recursive part for the eventual redirection
 			   download(openConnection.getHeaderField("Location"),fileName);
 			   in.close();
 			   openConnection.disconnect();
 			   return;
 		   }
-		   Files.copy(in, Paths.get(fileName));
+		   Files.copy(in, Paths.get(fileName)); //copy of the data in the file
 		   System.out.println("File size " + Files.size(Paths.get(fileName)));  
 		 } finally {
 		   in.close();

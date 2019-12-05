@@ -1,6 +1,10 @@
 package it.univpm.demoSpringBootApp.models;
 
-import java.lang.reflect.Array;
+/**
+ * Class that describe the Migrant model
+ * @author Tommaso
+ *
+ */
 
 public class MigrationStatus {
 	private String reason;
@@ -10,14 +14,9 @@ public class MigrationStatus {
 	private double migrantsFilteredValue;
 	private double[] migrants;
 	
-public double getMigrantsFilteredValue() {
-		return migrantsFilteredValue;
-	}
-
-	public void setMigrantsFilteredValue(double migrantsFilteredValue) {
-		this.migrantsFilteredValue = migrantsFilteredValue;
-	}
-
+/**
+ * Default constructor
+ */
 public MigrationStatus() {
 		this.reason = "";
 		this.citizen = "";
@@ -26,6 +25,14 @@ public MigrationStatus() {
 		this.migrants = null;
 		}	
 
+/**
+ * For the constructor we need this parameters
+ * @param reason, is the reason of the migration.
+ * @param citizen, is the citizenship.
+ * @param unit, in this case we treat human being for the dataset.
+ * @param geo, state of migration.
+ * @param migrants, numerical data of migrantions divided for years, from 2018 to 2008.
+ */
 public MigrationStatus(String reason, String citizen, String unit, String geo, double[] migrants) {
 	this.reason = reason;
 	this.citizen = citizen;
@@ -33,6 +40,14 @@ public MigrationStatus(String reason, String citizen, String unit, String geo, d
 	this.geo = geo;
 	this.migrants = migrants;
 	}
+
+public double getMigrantsFilteredValue() {
+	return migrantsFilteredValue;
+}
+
+public void setMigrantsFilteredValue(double migrantsFilteredValue) {
+	this.migrantsFilteredValue = migrantsFilteredValue;
+}
 
 public String getReason() {
 	return reason;

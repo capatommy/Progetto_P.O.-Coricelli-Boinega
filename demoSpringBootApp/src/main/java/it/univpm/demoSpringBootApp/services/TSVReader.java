@@ -9,6 +9,12 @@ import java.util.List;
 
 import it.univpm.demoSpringBootApp.models.MigrationStatus;
 
+/**
+ * 
+ * @author Tommaso
+ *
+ */
+
 public class TSVReader {
 	private final static String TAB_DELIMETER = "	";
 	
@@ -32,6 +38,11 @@ public class TSVReader {
 			ex.printStackTrace();
 		}
 	}
+	
+	/**
+	 * 
+	 * @throws IOException
+	 */
 	
 	public void parsing() throws IOException
 	{
@@ -62,10 +73,21 @@ public class TSVReader {
 			}
 		}
 	}
-
+	
+	/**
+	 * 
+	 * @return
+	 */
+	
 	public static List<String> getAnni() {
 		return anni;
 	}
+	
+	/**
+	 * 
+	 * @param index
+	 * @return
+	 */
 	
 	static List getMigYear(int index){
 		List<Object> migyear = new ArrayList<>();
@@ -76,11 +98,19 @@ public class TSVReader {
 		return migyear;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	
-
 	public static List<MigrationStatus> getMigrantsList() {
 		return migrantsList;
 	}	
+	
+	/**
+	 * 
+	 * @return
+	 */
 	
 	public BufferedReader getReader()
 	{
