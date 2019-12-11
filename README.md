@@ -2,7 +2,7 @@
 Progetto relativo al corso di Programmazione ad Oggetti del secondo anno di Ingegneria Informatica e dell'Automazione all'UNIVPM.
 
 ## Introduzione
-Questo progetto sviluppato con il framework Spring permette di creare un dataset per poi generare dati e statistiche tramite chiamate API GET.
+Questo progetto sviluppato con il framework Spring permette di creare un dataset per poi filtrare i dati e generare statistiche tramite chiamate API GET.
 ## Funzionamento 
 L'applicazione se eseguita fa il download di un dataset TSV tramite un JSON fornito a partire da un URL. Viene eseguito un controllo per non scaricare piu' volte il file, poi viene eseguito il parsing del file e viene generato il dataset tramite una lista di oggetti `MigrationStatus`, modello principale del progetto. Tramite un server locale si possono successivamente effettuare richieste da parte dell'utente.
 ## Implementazione modello e dati 
@@ -23,7 +23,7 @@ Le richieste GET effettuabili sono:
 ### FIltri
 La sintassi utilizzata per i filtri e' la seguente:
 - **"nomecampo"** si riferisce al campo da analizzare;
-- **"anno"** da inserire l'anno solo se intenzionati a filtrare dati numerici riguardanti un anno specifico, in questo caso "nomecampo" deve essere uguale a "migrants";
+- **"anno"** da inserire l'anno solo se intenzionati a filtrare dati numerici riguardanti un anno specifico, in questo caso **"nomecampo"** deve essere uguale a `migrants`;
 - **"operatore"** da inserire: >,<,==,>=,<=;
 - **"valore"** si intende il riferimento per filtrare i dati;
 - **"LinkOperator"** collega piu' filtri con "AND" o "OR";
