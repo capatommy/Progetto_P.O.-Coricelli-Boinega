@@ -119,6 +119,7 @@ public class Statistics {
 		return risultato;
 	}
 	
+
 	/**
 	 * Method that creates the list of values refering to the chosen field, this list afterwards will be used to generates stats.
 	 * @param nameField
@@ -138,7 +139,7 @@ public class Statistics {
 				values =TSVReader.getMigYear((Integer.parseInt(nameField)));	//get the list of values for the chosen year
 				return getTutteLeStatistiche(nameField, values);	//return stats for the wanted year
 			} else {	//string stats
-				
+
 				Object tmp;
 				for(MigrationStatus item: src) {
 					Method m;
@@ -149,8 +150,6 @@ public class Statistics {
 					}
 				return getTutteLeStatistiche(nameField, values); //return the map of stats
 			}
-			
-		}
 		
 	
 	/**
@@ -181,3 +180,5 @@ public class Statistics {
 			    }
 	}
 }
+
+	
