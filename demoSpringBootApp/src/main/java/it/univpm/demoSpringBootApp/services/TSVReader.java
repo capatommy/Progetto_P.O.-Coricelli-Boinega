@@ -51,10 +51,10 @@ public class TSVReader {
 	{
 		String temp;
 		reader.readLine();
-		while((temp = reader.readLine()) != null) { //reading every line as an instance of MigrationStatus
-			temp = temp.replace(",", TAB_DELIMETER); //replacing commas with tabs to separates better the fields
-			temp = temp.replace(":", "-1"); //replacing missing data with negative number to not make errors on stats
-			temp = temp.replace("d", ""); //erasing parameters of data
+		while((temp = reader.readLine()) != null) { 	//reading every line as an instance of MigrationStatus
+			temp = temp.replace(",", TAB_DELIMETER);	 //replacing commas with tabs to separates better the fields
+			temp = temp.replace(":", "-1"); 	//replacing missing data with negative number to not make errors on stats
+			temp = temp.replace("d", ""); 	//erasing parameters of data
 			temp = temp.replace("z", "");
 			temp = temp.replace("t", "");
 
@@ -85,7 +85,7 @@ public class TSVReader {
 	/**
 	 * Method that returns every value for each year.
 	 * @param index, index refering to the wanted year
-	 * @return list of values
+	 * @return list of all values for the chosen year
 	 */
 	
 	static List getMigYear(int index){
@@ -102,7 +102,7 @@ public class TSVReader {
 	
 	/**
 	 * Method that returns the entire dataset.
-	 * @return
+	 * @return list of objects MigrationStatus
 	 */
 	
 	public static List<MigrationStatus> getMigrantsList() {

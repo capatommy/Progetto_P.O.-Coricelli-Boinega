@@ -43,7 +43,7 @@ public MigrationStatus(String reason, String citizen, String unit, String geo, d
 
 /**
  * get method for filtered value
- * @return
+ * @return 
  */
 
 public double getMigrantsFilteredValue() {

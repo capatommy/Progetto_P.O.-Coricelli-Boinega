@@ -1,4 +1,4 @@
-package it.univpm.demoSpringBootApp;
+/*package it.univpm.demoSpringBootApp;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,7 +16,7 @@ import it.univpm.demoSpringBootApp.services.Statistics;
  *se il parametro dato risulta vuoto allora stampa tutte le statistiche disponibili  
  */
 // getstats/?campo=campo
-public class StatisticsController {
+/*public class StatisticsController {
     @GetMapping ("/getstats")
 	public List<Map> getstatistics (@RequestParam(name="campo", defaultValue = "") String campo){
     	
@@ -37,3 +37,4 @@ public class StatisticsController {
 	};}
 	
 
+*/

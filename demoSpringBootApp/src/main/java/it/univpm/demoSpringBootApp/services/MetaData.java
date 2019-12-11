@@ -27,7 +27,7 @@ public class MetaData {
 	}
 	
 	/**
-	 * Constructor of the class, generates the list
+	 * Constructor of the class, generates the list of metadata
 	 */
 
 	public MetaData() {

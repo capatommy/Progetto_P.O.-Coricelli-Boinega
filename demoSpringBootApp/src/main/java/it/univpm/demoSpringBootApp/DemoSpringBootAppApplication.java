@@ -25,7 +25,7 @@ public class DemoSpringBootAppApplication {
 		String url = "http://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=data/migr_reschange.tsv.gz&unzip=true";
 		
 		if(Files.exists(Paths.get(filename))) {	//Checks if the file exists
-			System.out.println("File gia scaricato.");
+			System.out.println("File gia' scaricato.");
 		}else {
 		Downloader.download(url,filename); //Downloader from the url
 		}

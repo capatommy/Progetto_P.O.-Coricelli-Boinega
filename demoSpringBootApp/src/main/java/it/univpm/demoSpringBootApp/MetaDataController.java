@@ -23,6 +23,7 @@ public class MetaDataController {
 	
 	/**
 	 * GET call that generates the list of metadata.
+	 * "/metadata"
 	 * @return
 	 */
 	
