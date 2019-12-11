@@ -17,7 +17,9 @@ Le richieste GET effettuabili sono:
 - **/migrants** Restituisce l'intero dataset;
 - **/metadata** Genera i metatadati;
 - **/get?filters="nomecampo":"anno":"operatore":"valore":"LinkOperator":...** Restituisce i dati filtrati secondo uno o piu' filtri inseriti;
-- stats....
+- **/stats?nameStats="field/year"&filter="nomecampo":"anno":"operatore":"valore":"LinkOperator":...** Restituisce le statistiche filtrate secondo i parametri inseriti;
+- **/stats** restituisce le statistiche di tutti i campi;
+- **/stats?nameStats="field/year"** Restituisce le stats di un campo;
 ### FIltri
 La sintassi utilizzata per i filtri e' la seguente:
 - "nomecampo" si riferisce al campo da analizzare;
@@ -27,13 +29,20 @@ La sintassi utilizzata per i filtri e' la seguente:
 - "LinkOperator" collega piu' filtri con "AND" o "OR";
 
 ### Statistiche
-
-
-### Esempi di Richieste
+Nella chiamata delle statistiche l'utente inserisce il campo da analizzare e l'eventuale filtro da applicare al dataset.
+I valori statistici generati sono i seguenti:
+- **Media**;
+- **Somma**;
+- **Minimo**;
+- **Massimo**;
+- **Deviazione Standard**;
+- **Conteggio Occorrenze Uniche**;
+- **Conteggio Elementi Totali**;
+### [Esempi di Richieste](https://github.com/capatommy/Progetto_P.O.-Coricelli-Boinega/tree/master/Esempi)
 
 ## [Diagrammi UML](https://github.com/capatommy/Progetto_P.O.-Coricelli-Boinega/tree/master/Diagrammi%20UML)
 
 ## Autori
-- **Tommaso Coricelli** S1084010
+- **Tommaso Coricelli** 1084010
 - **Davide Boinega**
 
