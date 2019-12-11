@@ -150,6 +150,7 @@ public class Statistics {
 					}
 				return getTutteLeStatistiche(nameField, values); //return the map of stats
 			}
+	}
 		
 	
 	/**
