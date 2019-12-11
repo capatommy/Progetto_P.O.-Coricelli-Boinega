@@ -22,11 +22,11 @@ Le richieste GET effettuabili sono:
 - **/stats?nameStats="field/year"** Restituisce le stats di un campo;
 ### FIltri
 La sintassi utilizzata per i filtri e' la seguente:
-- "nomecampo" si riferisce al campo da analizzare;
-- "anno" da inserire l'anno solo se intenzionati a filtrare dati numerici riguardanti un anno specifico, in questo caso "nomecampo" deve essere uguale a "migrants";
-- "operatore" da inserire: >,<,==,>=,<=;
-- "valore" si intende il riferimento per filtrare i dati;
-- "LinkOperator" collega piu' filtri con "AND" o "OR";
+- **"nomecampo"** si riferisce al campo da analizzare;
+- **"anno"** da inserire l'anno solo se intenzionati a filtrare dati numerici riguardanti un anno specifico, in questo caso "nomecampo" deve essere uguale a "migrants";
+- **"operatore"** da inserire: >,<,==,>=,<=;
+- **"valore"** si intende il riferimento per filtrare i dati;
+- **"LinkOperator"** collega piu' filtri con "AND" o "OR";
 
 ### Statistiche
 Nella chiamata delle statistiche l'utente inserisce il campo da analizzare e l'eventuale filtro da applicare al dataset.
