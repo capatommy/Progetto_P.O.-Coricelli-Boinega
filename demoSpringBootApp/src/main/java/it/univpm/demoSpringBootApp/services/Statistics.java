@@ -108,22 +108,7 @@ public abstract class Statistics {
 				mappa.put("numeroelementi", numeroelementi(listavalori));
 				mappa.put("elementiunici",conteggioElementiUnici(listavalori));
 	//}
-=======
-	if(campo.equals("")) {
-				List <Double> listavalori = new ArrayList<>();
-				for (Object v : lista) {
-					listavalori.add( ((Double) v) );	
-				}
-				
-				mappa.put("media", media(listavalori));
-				mappa.put("minimo", minimo(listavalori));
-				mappa.put("massimo", massimo(listavalori));
-				mappa.put("deviazionestandard", deviazionestandard(listavalori));
-				mappa.put("somma", somma(listavalori));
-				mappa.put("numeroelementi", numeroelementi(listavalori));
-				mappa.put("elementiunici",conteggioElementiUnici(listavalori));
-	}
->>>>>>> branch 'master' of https://github.com/capatommy/Progetto_P.O.-Coricelli-Boinega.git
+
 			return mappa;
 	
 			}
