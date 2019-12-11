@@ -11,13 +11,24 @@ import it.univpm.demoSpringBootApp.models.MigrationStatus;
 import it.univpm.demoSpringBootApp.services.MetaData;
 import it.univpm.demoSpringBootApp.services.TSVReader;
 
+/**
+ * Controller that manage the call of metadata.
+ * @author Tommaso
+ *
+ */
+
 @RestController
 public class MetaDataController {
-	private static MetaData meta = new MetaData();
+	private static MetaData meta = new MetaData(); // instance of MetaData
+	
+	/**
+	 * GET call that generates the list of metadata.
+	 * @return
+	 */
 	
 	@GetMapping("/metadata")
 	public List<Map> getMetaData()
 	{
-		return meta.getMetalist();
+		return meta.getMetalist(); //return the method from the class MetaData.
 	}
 }

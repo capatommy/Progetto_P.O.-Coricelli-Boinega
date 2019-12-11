@@ -26,12 +26,12 @@ import it.univpm.demoSpringBootApp.models.MigrationStatus;
  */
 
 public class Filters {
-	public static boolean check(Object value, String operator, Object th) {
-		if (th instanceof Number && value instanceof Number) {	
-			Double thC = ((Number)th).doubleValue();
-			Double valuec = ((Number)value).doubleValue();
+	public static boolean check(Object value, String operator, Object th) {	//boolean method that compare every values to the reference value.
+		if (th instanceof Number && value instanceof Number) {		//recognise that are two numerical values
+			Double thC = ((Number)th).doubleValue();	//cast in double
+			Double valuec = ((Number)value).doubleValue();	//cast in double
 			
-			if (operator.equals("=="))
+			if (operator.equals("=="))	//comparison with math operator
 				return value.equals(th);
 			else if (operator.equals(">"))
 				return valuec > thC;
@@ -42,8 +42,8 @@ public class Filters {
 			else if (operator.equals("<="))
 				return valuec <= thC;
 			
-		}else if(th instanceof String && value instanceof String)
-			return value.equals(th);
+		}else if(th instanceof String && value instanceof String)	//recognise that are twot strings
+			return value.equals(th); //compare them
 		
 		return false;		
 	}
@@ -53,13 +53,13 @@ public class Filters {
 	 * @param val, list of values to filters
 	 * @param oper, mathematical operator
 	 * @param rif, value of reference
-	 * @return
+	 * @return list of indexes that satisfy the filter
 	 */
 	
 	 public static List<Integer> filterL(List val, String oper, Object rif) {
 	        List<Integer> indexL = new ArrayList<>();
-	        String rifS = (String) rif;
-	        for (int i = 0; i < val.size(); i++) {
+	        String rifS = (String) rif; // cast object in string to be parsed then.
+	        for (int i = 0; i < val.size(); i++) {	//iteration to check all the values
 	            if (check(val.get(i), oper, Double.parseDouble(rifS))){ 
 	            	
 	                indexL.add(i);
@@ -107,7 +107,7 @@ public class Filters {
 						
 					}else {tmp = m.invoke(item); //for string filters is easier to check the filter condition
 					
-					if(Filters.check(tmp, operator.get(0), value.get(0)))
+					if(check(tmp, operator.get(0), value.get(0)))
 						out.add(item);
 					}
 				
