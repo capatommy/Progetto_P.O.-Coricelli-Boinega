@@ -7,18 +7,34 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Class Metadata generates the map
+ * @author Tommaso
+ *
+ */
+
 public class MetaData {
+	
 	private List<Map> metalist = new ArrayList<>();
+	
+	/**
+	 * Return the map of metadata
+	 * @return
+	 */
 	
 	public List<Map> getMetalist() {
 		return metalist;
 	}
+	
+	/**
+	 * Constructor of the class, generates the list
+	 */
 
 	public MetaData() {
 		
-		Field[] campi = MigrationStatus.class.getDeclaredFields();
+		Field[] campi = MigrationStatus.class.getDeclaredFields(); // get attributes from the main class
 		for (Field i : campi) {
-			Map<String,String> map = new HashMap<>();
+			Map<String,String> map = new HashMap<>(); 
 			map.put("alias", i.getName());
 			if(!i.getName().equals("migrants"))
 				map.put("source", i.getName().toUpperCase());
