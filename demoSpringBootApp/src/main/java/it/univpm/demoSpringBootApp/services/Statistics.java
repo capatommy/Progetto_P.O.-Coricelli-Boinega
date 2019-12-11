@@ -93,7 +93,7 @@ public abstract class Statistics {
 		Map<String, Object> mappa = new HashMap<>();
 		mappa.put("campo", campo);
  // riempimento della mappa con le statistiche in base l'anno( se questo rientra tra quelli disponibili)
-<<<<<<< HEAD
+
 	//if(campo.equals("")) {
 				List <Double> listavalori = new ArrayList<>();
 				for (Object v : lista) {
